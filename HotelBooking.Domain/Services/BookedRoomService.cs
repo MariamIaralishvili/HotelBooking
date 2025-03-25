@@ -53,7 +53,7 @@ public class BookedRoomService : IBookedRoomService
 
         // 2. aris tu ara dakavebuli am periodshi aqtiur javshnebs vamowmeb
         bool isBooked = await bookedRoomsRepository.IsRoomAvailable(booked.RoomId, booked.CheckIn, booked.CheckOut);
-        if (isBooked)
+        if (!isBooked)
             return false;
 
         // 3. fasis gamotvla

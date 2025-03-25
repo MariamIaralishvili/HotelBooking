@@ -4,7 +4,7 @@ namespace HotelBooking.Core.Interfaces;
 
 public interface IRefreshTokenRepository
 {
-    Task Create(RefreshToken city);
-    Task Update(RefreshToken city);
+    Task Create(RefreshToken token);
+    Task Update(RefreshToken token);
     Task<RefreshToken> GetByToken(string token);
 }

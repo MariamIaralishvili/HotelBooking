@@ -5,6 +5,7 @@ using HotelBooking.Domain.DTOs.RequestDto;
 using HotelBooking.Domain.DTOs.ResponseDto;
 using HotelBooking.Domain.Interfaces;
 using HotelBooking.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace HotelBooking.Domain.Services
@@ -66,6 +67,18 @@ namespace HotelBooking.Domain.Services
             var hot = result.Where(r => r.HotelId == hotelId).FirstOrDefault();
             var map = mapper.Map<RoomResponseDTO>(hot);
             return map;
+        }
+
+        public async Task UpdateAvailable(int roomId, bool isAvailable)
+        {
+            var room = await roomRepository.GetRoomById(roomId);
+            if (room == null)
+            {
+                throw new KeyNotFoundException($"Room with ID {roomId} not found.");
+            }
+
+            room.IsAvialable = isAvailable;
+            await roomRepository.UpdateRoom(roomId, room);
         }
     }
 }

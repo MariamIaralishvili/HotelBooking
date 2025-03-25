@@ -72,7 +72,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
-builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICityRepository, CitiesRepository>();
 builder.Services.AddScoped<IHotelRepository, HotelsRepository>();
 builder.Services.AddScoped<IBookedRoomRepository, BookedRoomsRepository>();
@@ -81,6 +80,7 @@ builder.Services.AddScoped<IRoomRepository, RoomsRepository>();
 builder.Services.AddScoped<IRoomTypeRepository, RoomTypeRepository>();
 builder.Services.AddScoped<IUserRepository, UsersRepository>();
 
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddScoped<IBookedRoomService, BookedRoomService>();
 builder.Services.AddScoped<IFavoriteService, FavoriteService>();

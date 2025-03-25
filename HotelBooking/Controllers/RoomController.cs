@@ -1,4 +1,5 @@
-﻿using HotelBooking.Domain.DTOs.RequestDto;
+﻿using HotelBooking.Core.Model;
+using HotelBooking.Domain.DTOs.RequestDto;
 using HotelBooking.Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -104,5 +105,22 @@ public class RoomController : ControllerBase
 
         await roomService.DeleteRoom(id);
         return Ok("Room deleted successfully.");
+    }
+
+    /// <summary>
+    /// update room aviability.
+    /// </summary>
+    /// <param name = "roomid" ></ param >
+    /// < param name="isavailable"></param>
+    /// <returns></returns>
+    [HttpPut(nameof(updateavailable))]
+    public async Task<IActionResult> updateavailable(int roomid, bool isavailable)
+    {
+        var existingroom = await roomService.GetRoomById(roomid);
+        if (existingroom == null)
+            return NotFound($"room with id {roomid} not found.");
+
+        await roomService.UpdateAvailable(roomid, isavailable);
+        return Ok("room updated successfully.");
     }
 }

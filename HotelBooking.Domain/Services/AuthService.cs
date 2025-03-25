@@ -81,13 +81,14 @@ public class AuthService:IAuthService
                 UserId = user.Id,
                 RefreshTokenValue = refresh
             });
+
             return new AuthResponse
             {
                 AuthToken = GenerateAuthToken(user),
                 RefreshToken = refresh,
             };
         }
-        throw new UnauthorizedAccessException("no such a user exist");
+        throw new UnauthorizedAccessException("No such a user exist");
     }
 
     public async Task<AuthResponse> Register(UserDTO user)

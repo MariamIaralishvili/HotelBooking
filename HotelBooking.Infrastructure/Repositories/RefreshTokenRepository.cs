@@ -25,9 +25,9 @@ public class RefreshTokenRepository : IRefreshTokenRepository
         return await _context.RefreshTokens.FirstOrDefaultAsync(io => io.RefreshTokenValue == token && io.IsInvoked == false);
     }
 
-    public async Task Update(RefreshToken city)
+    public async Task Update(RefreshToken token)
     {
-        _context.RefreshTokens.Update(city);
+        _context.RefreshTokens.Update(token);
         await _context.SaveChangesAsync();
     }
 }

@@ -40,7 +40,7 @@ namespace HotelBooking.Infrastructure.Repositories
 
         public async Task<User> GetUserById(int id)
         {
-            var user = context.Users.ToList().Where(io => io.Id == id).FirstOrDefault();
+            var user = context.Users.Include(io=>io.RefreshTokens).Where(io => io.Id == id).FirstOrDefault();
             return user;
         }
 

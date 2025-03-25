@@ -12,5 +12,6 @@ namespace HotelBooking.Domain.Interfaces
         Task<IEnumerable<RoomResponseDTO>> GetAllRoom();
         Task DeleteRoom(int id);
         Task<RoomResponseDTO> GetByHotelId(int hotelId);
+        Task UpdateAvailable(int roomId, bool isAvailable);
     }
 }

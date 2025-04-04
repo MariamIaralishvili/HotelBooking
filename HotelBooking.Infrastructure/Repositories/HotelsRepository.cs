@@ -1,6 +1,7 @@
 ﻿using HotelBooking.Core.DBContexti;
 using HotelBooking.Core.Interfaces;
 using HotelBooking.Core.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.Infrastructure.Repositories
 {
@@ -32,6 +33,11 @@ namespace HotelBooking.Infrastructure.Repositories
             return context.Hotels.ToList();
         }
 
+        public async Task<IEnumerable<Hotel>> GetHotelByCityId(int cityId)
+        {   
+            return await context.Hotels.Where(x => x.CityId == cityId).ToListAsync();
+        }
+
         public async Task<Hotel> GetHotelById(int id)
         {
             var hotel = context.Hotels.ToList().Where(io => io.Id == id).FirstOrDefault();
@@ -41,7 +47,8 @@ namespace HotelBooking.Infrastructure.Repositories
         public async Task UpdateHotel(int id, Hotel hotel)
         {
             var hot = context.Hotels.ToList().Where(io => io.Id == id).FirstOrDefault();
-            hot.Name = hotel.Name;
+            hot.Name = hotel.Name; 
+
             await context.SaveChangesAsync();
         }
     }

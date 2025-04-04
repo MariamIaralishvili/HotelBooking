@@ -10,6 +10,7 @@ public class BookedRoom
     public int Id { get; set; }
 
 
+
     [ForeignKey("Users")]
     public int UserId { get; set; }
     public User Users { get; set; }
@@ -18,6 +19,7 @@ public class BookedRoom
     [ForeignKey("Rooms")]
     public int RoomId { get; set; }
     public Room Rooms { get; set; }
+
     public DateTime CheckIn { get; set; }
     public DateTime CheckOut { get; set; }
     public decimal TotalPrice { get; set; }

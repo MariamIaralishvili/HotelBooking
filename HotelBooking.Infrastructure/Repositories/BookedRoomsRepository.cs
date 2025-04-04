@@ -70,5 +70,31 @@ namespace HotelBooking.Infrastructure.Repositories
                  (checkOut > b.CheckIn && checkOut <= b.CheckOut) ||
                  (checkIn <= b.CheckIn && checkOut >= b.CheckOut)));
         }
+
+        public async Task<IEnumerable<BookedRoom>> GetReservedRoomData(DateTime startDate, DateTime endDate)
+        {
+            var result = context.BookedRooms.ToList().Where(x => startDate >= x.CheckIn && endDate <= x.CheckOut).ToList();
+            return result;
+        }
+
+        public async Task<int> GetTotalNumberOfBookingForAClient(int clientId)
+        {
+            var result = context.BookedRooms.ToList().Where(x => x.UserId == clientId).Count();
+            return result;
+        }
+
+        public async Task<BookedRoom> GetLastReservationByClient(int clientId)
+        {
+            var reservation = context.BookedRooms.ToList().Where
+                (x => x.UserId == clientId && x.IsActive).OrderByDescending(x => x.Id).FirstOrDefault();
+            return reservation;
+        }
+
+        public async Task<BookedRoom> GetLastReservationForRoom(int roomId)
+        {
+            var reservation = context.BookedRooms.ToList().Where
+                (x => x.RoomId == roomId && x.IsActive).OrderByDescending(x => x.Id).FirstOrDefault();
+            return reservation;
+        }
     }
 }

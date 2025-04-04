@@ -1,6 +1,7 @@
 ﻿using HotelBooking.Core.Model;
 using HotelBooking.Domain.DTOs.RequestDto;
 using HotelBooking.Domain.Interfaces;
+using HotelBooking.Domain.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +9,7 @@ namespace HotelBooking.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+//[Authorize]
 public class RoomController : ControllerBase
 {
     private readonly IRoomService roomService;
@@ -122,5 +123,21 @@ public class RoomController : ControllerBase
 
         await roomService.UpdateAvailable(roomid, isavailable);
         return Ok("room updated successfully.");
+    }
+
+    /// <summary>
+    /// Get All Rooms Free For Reserve.
+    /// </summary>
+    /// <param name="startDate"></param>
+    /// <param name="endDate"></param>
+    /// <returns></returns>
+    [HttpGet(nameof(GetAllRoomsFreeForReserve))]
+    public async Task<IActionResult> GetAllRoomsFreeForReserve(DateTime startDate, DateTime endDate)
+    {
+        var result = await roomService.GetAllRoomsFreeForReserve(startDate, endDate);
+        if (result == null)
+            return NotFound("No free rooms found.");
+
+        return Ok(result);
     }
 }

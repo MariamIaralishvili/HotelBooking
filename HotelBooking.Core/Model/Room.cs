@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.Contracts;
 
 namespace HotelBooking.Core.Model;
 
@@ -26,4 +27,5 @@ public class Room
     public string? Image { get; set; }
     public List<BookedRoom> BookedRooms { get; set; }
     public List<Favorite> Favorites { get; set; }
+    public List<Review> Reviews { get; set; }
 }

@@ -18,4 +18,5 @@ public class User
     public List<BookedRoom> BookedRooms { get; set; }
     public List<Favorite> Favorites { get; set; }
     public List<RefreshToken> RefreshTokens { get; set; }
+    public List<Review> Reviews { get; set; }
 }

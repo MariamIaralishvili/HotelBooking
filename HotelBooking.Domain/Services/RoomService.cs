@@ -80,5 +80,12 @@ namespace HotelBooking.Domain.Services
             room.IsAvialable = isAvailable;
             await roomRepository.UpdateRoom(roomId, room);
         }
+
+        public async Task<IEnumerable<RoomResponseDTO>> GetAllRoomsFreeForReserve(DateTime startDate, DateTime endDate)
+        {
+            var result = await roomRepository.GetAllRoomsFreeForReserve(startDate, endDate);
+            var map = mapper.Map<IEnumerable<RoomResponseDTO>>(result);
+            return map;
+        }
     }
 }

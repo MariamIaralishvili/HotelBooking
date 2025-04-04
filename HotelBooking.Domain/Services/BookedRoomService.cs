@@ -42,7 +42,7 @@ public class BookedRoomService : IBookedRoomService
         var map = mapper.Map<BookedRoomResponseDTO>(reservedByRoomId);
         return map;
     }
-
+   
     public async Task<bool> ReservedRoom(BookedRoomDTO booked)
     {
         var room = await roomRepository.GetRoomById(booked.RoomId);
@@ -84,5 +84,33 @@ public class BookedRoomService : IBookedRoomService
         await bookedRoomsRepository.SoftDelete(reserve.Id);
 
         return true;
+    }
+
+    public async Task<IEnumerable<BookedRoomResponseDTO>> GetReservedRoomData(DateTime startDate, DateTime endDate)
+    {
+        var result = await bookedRoomsRepository.GetReservedRoomData(startDate, endDate);
+        var map = mapper.Map<IEnumerable<BookedRoomResponseDTO>>(result);
+        return map;
+    }
+
+    public async Task<int> GetTotalNumberOfBookingForAClient(int clientId)
+    {
+        var result = await bookedRoomsRepository.GetTotalNumberOfBookingForAClient(clientId);
+        //var map = mapper.Map<BookedRoomResponseDTO>(result);
+        return result;
+    }
+
+    public async Task<BookedRoomResponseDTO> GetLastReservationByClient(int clientId)
+    {
+        var result = await bookedRoomsRepository.GetLastReservationByClient(clientId);
+        var map = mapper.Map<BookedRoomResponseDTO>(result);
+        return map;
+    }
+
+    public async Task<BookedRoomResponseDTO> GetLastReservationForRoom(int roomId)
+    {
+        var result = await bookedRoomsRepository.GetLastReservationForRoom(roomId);
+        var map = mapper.Map<BookedRoomResponseDTO>(result);
+        return map;
     }
 }

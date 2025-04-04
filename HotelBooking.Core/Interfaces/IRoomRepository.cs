@@ -10,5 +10,6 @@ namespace HotelBooking.Core.Interfaces
         Task<IEnumerable<Room>> GetAllRoom();
         Task DeleteRoom(int id);
         Task UpdateAvaliable(int roomId, bool isAvaliable);
+        Task<IEnumerable<Room>> GetAllRoomsFreeForReserve(DateTime startDate, DateTime endDate);
     }
 }

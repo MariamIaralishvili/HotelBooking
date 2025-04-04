@@ -11,5 +11,6 @@ namespace HotelBooking.Domain.Interfaces
         Task<HotelResponseDTO> GetHotelById(int id);
         Task<IEnumerable<HotelResponseDTO>> GetAllHotel();
         Task DeleteHotel(int id);
+        Task<IEnumerable<HotelResponseDTO>> GetHotelByCityId(int cityId);
     }
 }

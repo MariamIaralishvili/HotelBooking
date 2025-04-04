@@ -1,4 +1,6 @@
-﻿using HotelBooking.Domain.DTOs.RequestDto;
+﻿using HotelBooking.Core.Model;
+using HotelBooking.Domain.DTOs.RequestDto;
+using HotelBooking.Domain.DTOs.ResponseDto;
 using HotelBooking.Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -89,5 +91,20 @@ public class HotelController : ControllerBase
 
         await hotelService.DeleteHotel(id);
         return Ok("Hotel deleted successfully.");
+    }
+
+    /// <summary>
+    /// Retrieves a hotel by city ID.
+    /// </summary>
+    /// <param name="cityId"></param>
+    /// <returns></returns>
+    [HttpGet(nameof(GetHotelByCityId))]
+    public async Task<IActionResult> GetHotelByCityId(int cityId)
+    {
+        var hotel = await hotelService.GetHotelByCityId(cityId);
+        if (hotel == null)
+            return NotFound($"Hotel with ID {cityId} not found.");
+
+        return Ok(hotel);
     }
 }

@@ -54,6 +54,14 @@ namespace HotelBooking.Domain.Services
             return map;
         }
 
+        public async Task<IEnumerable<HotelResponseDTO>> GetHotelByCityId(int cityId)
+        {
+            var hotel = await hotelsRepository.GetAllHotel();
+            var result = hotel.ToList().Where(x => x.CityId == cityId);
+            var map = mapper.Map<IEnumerable<HotelResponseDTO>>(result);
+            return map;
+        }
+
         public async Task UpdateHotel(int id, HotelDTO hotel)
         {
             var map = mapper.Map<Hotel>(hotel);

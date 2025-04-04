@@ -9,5 +9,6 @@ namespace HotelBooking.Core.Interfaces
         Task<Hotel> GetHotelById(int id);
         Task<IEnumerable<Hotel>> GetAllHotel();
         Task DeleteHotel(int id);
+        Task<IEnumerable<Hotel>> GetHotelByCityId(int cityId);
     }
 }
